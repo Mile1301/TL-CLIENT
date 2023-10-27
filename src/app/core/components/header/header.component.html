@@ -1,0 +1,62 @@
+<header>
+  <div class="header-brand">
+    <i class="fa-solid fa-user-ninja"></i>
+    <h1 routerLink="/">TLC</h1>
+  </div>
+  <nav class="nav">
+    <div
+      class="nav-link"
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{
+        exact: true
+      }"
+    >
+      Home
+    </div>
+
+    <ng-container *ngIf="!currentUser">
+      <div class="nav-link" routerLink="/login" routerLinkActive="active">
+        Login
+      </div>
+      <div class="nav-link" routerLink="/register" routerLinkActive="active">
+        Register
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="currentUser">
+      <div
+        class="nav-link"
+        routerLink="/posts"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{
+          exact: true
+        }"
+      >
+        Posts
+      </div>
+      <div
+        class="nav-link"
+        routerLink="/posts/create"
+        routerLinkActive="active"
+      >
+        Create Post
+      </div>
+      <div class="user-badge" (click)="toggleDropDown()">
+        {{ currentUser.username[0] | uppercase }}
+      </div>
+      <div class="dropdown" *ngIf="isDropDownOpen" (click)="toggleDropDown()">
+        <div class="username dropdown-item">
+          <i class="fa fa-user"></i>
+          {{ currentUser.username }}
+        </div>
+        <div class="dropdown-item" routerLink="/posts/user">My Posts</div>
+        <div class="dropdown-item" routerLink="/posts/user/comments">
+          My Comments
+        </div>
+        <div class="dropdown-item" (click)="onLogout()">Logout</div>
+        <div class="dropdown-item" (click)="onLogoutAll()">Logout All</div>
+      </div>
+    </ng-container>
+  </nav>
+</header>

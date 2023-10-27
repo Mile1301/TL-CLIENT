@@ -1,0 +1,37 @@
+<section class="container">
+  <div class="container-heading">
+    <h2>{{ editPostData._id ? "Edit" : "Create" }} Post</h2>
+  </div>
+  <form
+    [formGroup]="postForm"
+    class="form-container"
+    (ngSubmit)="onFormSubmit()"
+  >
+    <div class="form-group">
+      <label for="post-title">Title</label>
+      <input
+        type="text"
+        id="post-title"
+        placeholder="enter post title"
+        class="form-control"
+        formControlName="title"
+      />
+    </div>
+    <div class="form-group">
+      <label for="post-body">Body</label>
+      <textarea
+        id="post-body"
+        rows="5"
+        class="form-control"
+        formControlName="body"
+        placeholder="enter post text"
+      ></textarea>
+    </div>
+    <div class="controls">
+      <button type="button" (click)="goBack()">Back</button>
+      <button type="submit" [disabled]="postForm.invalid">
+        {{ editPostData._id ? "Update" : "Add" }}
+      </button>
+    </div>
+  </form>
+</section>
